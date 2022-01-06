@@ -11,20 +11,6 @@
         "properties": {
           "value": "",
           "scope": "input",
-          "name": "observable_type",
-          "type": "datatype.string",
-          "description": "The type of observable pivoted on",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01U1CCYT79VEL2N5JwTjLrDJsbvybe5MWVu",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
           "name": "observable_value",
           "type": "datatype.string",
           "description": "The value of the observable pivoted on",
@@ -37,15 +23,15 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "AMP for Endpoints",
-          "scope": "local",
-          "name": "Secure Endpoint Module Name",
+          "value": "amp_computer_guid",
+          "scope": "input",
+          "name": "observable_type",
           "type": "datatype.string",
-          "description": "The name of your Secure Endpoint module in SecureX",
+          "description": "The type of observable pivoted on",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01U1CCYT7A9FC5kRE41SuOJRTtiy1cd9WlA",
+        "unique_name": "variable_workflow_01U1CCYT79VEL2N5JwTjLrDJsbvybe5MWVu",
         "object_type": "variable_workflow"
       },
       {
@@ -72,6 +58,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01U1DEIW82M7P5t7WkZLCFF0Uopy9qcc3H8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "AMP for Endpoints",
+          "scope": "local",
+          "name": "Secure Endpoint Module Name",
+          "type": "datatype.string",
+          "description": "The name of your Secure Endpoint module in SecureX",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01U1CCYT7A9FC5kRE41SuOJRTtiy1cd9WlA",
         "object_type": "variable_workflow"
       }
     ],
@@ -449,8 +449,8 @@
     }
   },
   "atomic_workflows": [
-    "definition_workflow_01PP75S3LTBW4420OZU3rdHWKHFnE6aC7yH",
     "definition_workflow_01PP74F8V7XK02YLxMMHUqVt4JVetzJhR9D",
+    "definition_workflow_01PP75S3LTBW4420OZU3rdHWKHFnE6aC7yH",
     "definition_workflow_01PP78A5LQXZA7PavA44Ex35KroriQgIjvH"
   ]
 }
