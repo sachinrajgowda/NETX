@@ -11,20 +11,6 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "Secure Endpoint Environment URL",
-          "type": "datatype.string",
-          "description": "Placeholder for the URL of the Secure Endpoint environment being used. You don't need to provide this, it will be fetched automatically",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01U5DQKGTCFQJ06cGU3lpygt0pehlcs3e8s",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
           "name": "SecureX Environment URL",
           "type": "datatype.string",
           "description": "Placeholder for the URL of the SecureX environment being used. You don't need to provide this, it will be fetched automatically",
@@ -32,6 +18,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01U5DQKGTCT9B0DvLp8f5NeFyXqS5bcTm7h",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Secure Endpoint Environment URL",
+          "type": "datatype.string",
+          "description": "Placeholder for the URL of the Secure Endpoint environment being used. You don't need to provide this, it will be fetched automatically",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01U5DQKGTCFQJ06cGU3lpygt0pehlcs3e8s",
         "object_type": "variable_workflow"
       }
     ],
@@ -739,6 +739,46 @@
                 ]
               },
               {
+                "unique_name": "definition_activity_01U6EDYK5X3YQ4qoizE9dvkSUyfZ7yD6WrY",
+                "name": "Group",
+                "title": "Isolate the Endpoint",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Isolate the Endpoint",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01U6EF6B70TD61ST8zMRhZRZAHfHxKiR20h",
+                    "name": "Secure Endpoint - Isolate Host",
+                    "title": "Secure Endpoint - Isolate Host",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Secure Endpoint - Isolate Host",
+                      "input": {
+                        "variable_workflow_01PP77UWF61XC6J78V5wbJCUMq6FbLtlWMn": "$activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.connector_guid$"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01U0GHI5QRQJ93dKD7VV9ThZGFR5E75ZHtS",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
                 "unique_name": "definition_activity_01U5E5Z7QROO201weot5QVgh6y0tjAApXm7",
                 "name": "Group",
                 "title": "Send Email Notification",
@@ -759,7 +799,7 @@
                     "base_type": "activity",
                     "properties": {
                       "action_timeout": 180,
-                      "body": "A Threat was detected for Secure Endpoint host \u003cb\u003e$activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.hostname$\u003c/b\u003e\n\u003cbr/\u003e\u003cbr/\u003e\nAn Incident Ticket as well as associated Casebook is created on SecureX for further Investigation\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eSummary of the Event:\u003c/b\u003e\u003cbr/\u003e\n* \u003cb\u003eIncident ID:\u003c/b\u003e $activity.definition_activity_01U5DQLIVB1K01s42NSFN0E2ngdYRwokOCZ.output.variable_workflow_01PP773PC1BPV1bDuA5gxMPKC5vx4EJTYXw$\u003cbr/\u003e\n* \u003cb\u003eCasebook ID:\u003c/b\u003e $activity.definition_activity_01U5DQLKNND826GEj6m6dvpDVQplbDJ5OAg.output.variable_workflow_01PP75X6NM6A27cUzf6oC7zeZQTz0YxT8J0$\u003cbr/\u003e\n\u003cbr/\u003e\n* \u003cb\u003eEvent Severity:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].severity$\u003cbr/\u003e\n* \u003cb\u003eDetection:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].detection$\u003cbr/\u003e\n* \u003cb\u003eFile:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_name$ ($activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.disposition$)\u003cbr/\u003e\n* \u003cb\u003eSHA256:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_hash$\u003cbr/\u003e\n* \u003cb\u003eDate:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].date$\u003cbr/\u003e\n\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\nHappy Hunting!!\u003cbr/\u003e\nRegards,\u003cbr/\u003e\nNETX SOC\u003cbr/\u003e",
+                      "body": "A Threat was detected for Secure Endpoint host \u003cb\u003e$activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.hostname$\u003c/b\u003e and is Isolated for further Investigation\n\u003cbr/\u003e\u003cbr/\u003e\nAn Incident Ticket as well as associated Casebook is created and can be accessed on SecureX\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eSummary of the Event:\u003c/b\u003e\u003cbr/\u003e\n* \u003cb\u003eIncident ID:\u003c/b\u003e https://visibility.amp.cisco.com/incidents?q=id:$activity.definition_activity_01U5DQLIVB1K01s42NSFN0E2ngdYRwokOCZ.output.variable_workflow_01PP773PC1CVM3SzJJrvuZfEsO3Nbw7IO7S$\u003cbr/\u003e\n* \u003cb\u003eCasebook ID:\u003c/b\u003e $activity.definition_activity_01U5DQLKNND826GEj6m6dvpDVQplbDJ5OAg.output.variable_workflow_01PP75X6NLWYO1BiZbBFEXJyqmmfiQcqId3$\u003cbr/\u003e\n\u003cbr/\u003e\n* \u003cb\u003eEvent Severity:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].severity$\u003cbr/\u003e\n* \u003cb\u003eDetection:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].detection$\u003cbr/\u003e\n* \u003cb\u003eFile:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_name$ ($activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.disposition$)\u003cbr/\u003e\n* \u003cb\u003eSHA256:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_hash$\u003cbr/\u003e\n* \u003cb\u003eDate:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].date$\u003cbr/\u003e\n\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\nHappy Hunting!!\u003cbr/\u003e\nRegards,\u003cbr/\u003e\nNETX SOC\u003cbr/\u003e",
                       "continue_if_one_address_valid": false,
                       "continue_on_failure": false,
                       "display_name": "Send Email",
@@ -809,7 +849,7 @@
       "type": "schedule",
       "base_type": "trigger",
       "ref_id": "schedule_01NSEWHB8X92P1m2NdLb8yDYycCeeHbdLXy",
-      "version": "",
+      "version": "1.0.0",
       "disabled": false,
       "unique_name": "triggerschedule_01U5DQKKK5X1G7JiXvzcRQsNifb0PdUnVOR",
       "object_type": "triggerschedule"
@@ -853,6 +893,23 @@
         "no_runtime_user": false,
         "path": "/v1",
         "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01U0GHJ2PGG9Y7NfYiD4thcaGfJQaz8tM5j": {
+      "unique_name": "definition_target_01U0GHJ2PGG9Y7NfYiD4thcaGfJQaz8tM5j",
+      "name": "CTR_API",
+      "title": "CTR API Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Target used to invoke iroh endpoints",
+        "disable_certificate_validation": false,
+        "display_name": "CTR_API",
+        "host": "visibility.amp.cisco.com",
+        "no_runtime_user": true,
+        "path": "/iroh",
         "protocol": "https"
       }
     },
@@ -967,6 +1024,7 @@
           "include_all_targets": false,
           "selected_target_ids": [
             "definition_target_01U0GHI5QRQJ93dKD7VV9ThZGFR5E75ZHtS",
+            "definition_target_01U0GHJ2PGG9Y7NfYiD4thcaGfJQaz8tM5j",
             "definition_target_01U0GHJ95ZXPZ0PvJ2yn2hoTdhyvttoN6VH",
             "definition_target_01U0GHJNE0K1A25iLyUn1uZxHZ5aKvc4Bx4"
           ]
@@ -991,10 +1049,11 @@
   },
   "atomic_workflows": [
     "definition_workflow_01PP78LW2WNY80aDM6OHNiRu2VPG4BrR8bq",
+    "definition_workflow_01PP74DHPLES477KZo2MCv9N9Dx5fza9wiU",
     "definition_workflow_01PP76FTQKEYW2dg8RXriNAf2EkkZ4Agqg9",
     "definition_workflow_01PP75S3LTBW4420OZU3rdHWKHFnE6aC7yH",
-    "definition_workflow_01PP74DHPLES477KZo2MCv9N9Dx5fza9wiU",
     "definition_workflow_01PP773PI1X3Y1YQWhirIL8Uy40Thd6ND7r",
+    "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
     "definition_workflow_01PP75X6VPQNK4hKE1XQXIMeIcHrE1khIML"
   ]
 }
