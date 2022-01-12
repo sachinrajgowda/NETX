@@ -737,88 +737,6 @@
                     "object_type": "definition_activity"
                   }
                 ]
-              },
-              {
-                "unique_name": "definition_activity_01U6EDYK5X3YQ4qoizE9dvkSUyfZ7yD6WrY",
-                "name": "Group",
-                "title": "Isolate the Endpoint",
-                "type": "logic.group",
-                "base_type": "activity",
-                "properties": {
-                  "continue_on_failure": false,
-                  "display_name": "Isolate the Endpoint",
-                  "skip_execution": false
-                },
-                "object_type": "definition_activity",
-                "actions": [
-                  {
-                    "unique_name": "definition_activity_01U6EF6B70TD61ST8zMRhZRZAHfHxKiR20h",
-                    "name": "Secure Endpoint - Isolate Host",
-                    "title": "Secure Endpoint - Isolate Host",
-                    "type": "workflow.atomic_workflow",
-                    "base_type": "subworkflow",
-                    "properties": {
-                      "continue_on_failure": false,
-                      "display_name": "Secure Endpoint - Isolate Host",
-                      "input": {
-                        "variable_workflow_01PP77UWF61XC6J78V5wbJCUMq6FbLtlWMn": "$activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.connector_guid$"
-                      },
-                      "runtime_user": {
-                        "target_default": true
-                      },
-                      "skip_execution": false,
-                      "target": {
-                        "override_workflow_target": true,
-                        "target_id": "definition_target_01U0GHI5QRQJ93dKD7VV9ThZGFR5E75ZHtS",
-                        "target_type": "web-service.endpoint"
-                      },
-                      "workflow_id": "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5"
-                    },
-                    "object_type": "definition_activity"
-                  }
-                ]
-              },
-              {
-                "unique_name": "definition_activity_01U5E5Z7QROO201weot5QVgh6y0tjAApXm7",
-                "name": "Group",
-                "title": "Send Email Notification",
-                "type": "logic.group",
-                "base_type": "activity",
-                "properties": {
-                  "continue_on_failure": false,
-                  "display_name": "Send Email Notification",
-                  "skip_execution": false
-                },
-                "object_type": "definition_activity",
-                "actions": [
-                  {
-                    "unique_name": "definition_activity_01U5E6ZLJGC516kC39x4k79O3HwhXVgYhel",
-                    "name": "Send Email",
-                    "title": "Send Email",
-                    "type": "email.smtp_send_email",
-                    "base_type": "activity",
-                    "properties": {
-                      "action_timeout": 180,
-                      "body": "A Threat was detected for Secure Endpoint host \u003cb\u003e$activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.hostname$\u003c/b\u003e and is Isolated for further Investigation\n\u003cbr/\u003e\u003cbr/\u003e\nAn Incident Ticket as well as associated Casebook is created and can be accessed on SecureX\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\u003cb\u003eSummary of the Event:\u003c/b\u003e\u003cbr/\u003e\n* \u003cb\u003eIncident ID:\u003c/b\u003e https://visibility.amp.cisco.com/incidents?q=id:$activity.definition_activity_01U5DQLIVB1K01s42NSFN0E2ngdYRwokOCZ.output.variable_workflow_01PP773PC1CVM3SzJJrvuZfEsO3Nbw7IO7S$\u003cbr/\u003e\n* \u003cb\u003eCasebook ID:\u003c/b\u003e $activity.definition_activity_01U5DQLKNND826GEj6m6dvpDVQplbDJ5OAg.output.variable_workflow_01PP75X6NLWYO1BiZbBFEXJyqmmfiQcqId3$\u003cbr/\u003e\n\u003cbr/\u003e\n* \u003cb\u003eEvent Severity:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].severity$\u003cbr/\u003e\n* \u003cb\u003eDetection:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].detection$\u003cbr/\u003e\n* \u003cb\u003eFile:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_name$ ($activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.disposition$)\u003cbr/\u003e\n* \u003cb\u003eSHA256:\u003c/b\u003e $activity.definition_activity_01U5DQLBXSPR81D1jIIyw93NPHmbxhslUMT.output.jsonpath_queries.file_hash$\u003cbr/\u003e\n* \u003cb\u003eDate:\u003c/b\u003e $activity.definition_activity_01U5DQL856GDB6lwQtPztJDreexsfZRv5qv.input.source_array[@].date$\u003cbr/\u003e\n\n\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\n\nHappy Hunting!!\u003cbr/\u003e\nRegards,\u003cbr/\u003e\nNETX SOC\u003cbr/\u003e",
-                      "continue_if_one_address_valid": false,
-                      "continue_on_failure": false,
-                      "display_name": "Send Email",
-                      "html": true,
-                      "runtime_user": {
-                        "override_target_runtime_user": true,
-                        "runtime_user_id": "definition_runtime_user_01U18BQAFHZ5M5B5TPXruhvIC1qrm0BW7rT"
-                      },
-                      "skip_execution": false,
-                      "subject": "New Incident Created: Threat Detected on ($activity.definition_activity_01U5DQLAW7C8T5KLPNJDaPrrDdgBjkz1Em1.output.jsonpath_queries.hostname$)",
-                      "target": {
-                        "override_workflow_target": true,
-                        "target_id": "definition_target_01U1BNN4SJBFM0Kix0JgmxGmwT8gfNH60Op"
-                      },
-                      "to": "$env.variable_01U1DC683VG6N1prcE2jSFQBu5zUTBYXkVo.env.variable_01U1DC683VG6N1prcE2jSFQBu5zUTBYXkVo$"
-                    },
-                    "object_type": "definition_activity"
-                  }
-                ]
               }
             ]
           }
@@ -946,21 +864,6 @@
         "no_runtime_user": true,
         "protocol": "https"
       }
-    },
-    "definition_target_01U1BNN4SJBFM0Kix0JgmxGmwT8gfNH60Op": {
-      "unique_name": "definition_target_01U1BNN4SJBFM0Kix0JgmxGmwT8gfNH60Op",
-      "name": "GMAIL-SMTP",
-      "title": "GMAIL-SMTP",
-      "type": "email.smtp_endpoint",
-      "base_type": "target",
-      "object_type": "definition_target",
-      "properties": {
-        "display_name": "GMAIL-SMTP",
-        "no_runtime_user": true,
-        "port": 587,
-        "protocol": "SMTP",
-        "server": "smtp.gmail.com"
-      }
     }
   },
   "runtime_users": {
@@ -993,19 +896,6 @@
         "basic_username": "*****",
         "display_name": "AMP_Credentials"
       }
-    },
-    "definition_runtime_user_01U18BQAFHZ5M5B5TPXruhvIC1qrm0BW7rT": {
-      "unique_name": "definition_runtime_user_01U18BQAFHZ5M5B5TPXruhvIC1qrm0BW7rT",
-      "name": "Sachin Rajegowda",
-      "title": "Sachin Rajegowda",
-      "type": "runtime_user.email_credentials",
-      "base_type": "runtime_user",
-      "object_type": "definition_runtime_user",
-      "properties": {
-        "display_name": "Sachin Rajegowda",
-        "password": "*****",
-        "sender": "*****"
-      }
     }
   },
   "target_groups": {
@@ -1033,27 +923,12 @@
       "object_type": "target_group"
     }
   },
-  "variables": {
-    "variable_01U1DC683VG6N1prcE2jSFQBu5zUTBYXkVo": {
-      "unique_name": "variable_01U1DC683VG6N1prcE2jSFQBu5zUTBYXkVo",
-      "properties": {
-        "value": "srajegowda@netxperts.com",
-        "scope": "env",
-        "name": "TaskApprover",
-        "type": "datatype.string",
-        "is_required": false,
-        "is_invisible": false
-      },
-      "object_type": "variable"
-    }
-  },
   "atomic_workflows": [
+    "definition_workflow_01PP773PI1X3Y1YQWhirIL8Uy40Thd6ND7r",
+    "definition_workflow_01PP75X6VPQNK4hKE1XQXIMeIcHrE1khIML",
     "definition_workflow_01PP78LW2WNY80aDM6OHNiRu2VPG4BrR8bq",
-    "definition_workflow_01PP74DHPLES477KZo2MCv9N9Dx5fza9wiU",
     "definition_workflow_01PP76FTQKEYW2dg8RXriNAf2EkkZ4Agqg9",
     "definition_workflow_01PP75S3LTBW4420OZU3rdHWKHFnE6aC7yH",
-    "definition_workflow_01PP773PI1X3Y1YQWhirIL8Uy40Thd6ND7r",
-    "definition_workflow_01PP77UWMZGOK7EpAqljGObzskFeYlPRah5",
-    "definition_workflow_01PP75X6VPQNK4hKE1XQXIMeIcHrE1khIML"
+    "definition_workflow_01PP74DHPLES477KZo2MCv9N9Dx5fza9wiU"
   ]
 }
